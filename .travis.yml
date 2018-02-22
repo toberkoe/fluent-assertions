@@ -1,6 +1,8 @@
-install: gradle wrapper --gradle-version 4.4
-
 language: java
+sudo: false
+before_install:
+ - chmod +x gradlew
+install: true
 
 addons:
   sonarcloud:
