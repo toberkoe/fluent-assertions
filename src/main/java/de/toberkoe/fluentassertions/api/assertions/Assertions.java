@@ -50,4 +50,14 @@ public class Assertions {
     public static DoubleAssert assertThat(Double number) {
         return new DoubleAssert(number);
     }
+
+    /**
+     * Creates an instance of {@link LongAssert}.
+     *
+     * @param number the value to be asserted
+     * @return instance of assertion object
+     */
+    public static LongAssert assertThat(Long number) {
+        return new LongAssert(number);
+    }
 }
