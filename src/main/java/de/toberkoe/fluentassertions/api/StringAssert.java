@@ -1,10 +1,6 @@
-package de.toberkoe.fluentassertions.api.assertions;
+package de.toberkoe.fluentassertions.api;
 
 import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
-import static java.lang.String.format;
 
 /**
  * {@code String} Assertions.
@@ -12,26 +8,10 @@ import static java.lang.String.format;
  *
  * @author t.bertram-koehler
  */
-public class StringAssert {
-
-    private final String value;
+public class StringAssert extends AbstractObjectAssert<StringAssert, String> {
 
     protected StringAssert(String value) {
-        this.value = value;
-    }
-
-    public StringAssert isNull() {
-        if (test(Objects::isNull)) {
-            return this;
-        }
-        throw error("Expected to be null but was %s", value);
-    }
-
-    public StringAssert isNotNull() {
-        if (!test(Objects::isNull)) {
-            return this;
-        }
-        throw error("Expected to be not null");
+        super(value);
     }
 
     public StringAssert isEmpty() {
@@ -55,22 +35,6 @@ public class StringAssert {
             return this;
         }
         throw error("Expected to be null or empty");
-    }
-
-    public StringAssert isEqualTo(String expected) {
-        if (test(expected::equals)) {
-            return this;
-        }
-
-        throw error("Expected to be %s but was %s", expected, value);
-    }
-
-    public StringAssert isNotEqualTo(String expected) {
-        if (!test(expected::equals)) {
-            return this;
-        }
-
-        throw error("Expected to be not equal to %s", expected);
     }
 
     public StringAssert isEqualToIgnoringCase(String expected) {
@@ -134,31 +98,11 @@ public class StringAssert {
             return this;
         }
 
-        throw error("Expected %s to have length of %d", value, size);
+        throw error("Expected %s to have length of %s", value, size);
     }
 
     public StringAssert hasSameSizeAs(String compareTo) {
         return hasSizeOf(compareTo.length());
     }
 
-    private boolean test(Predicate<String> predicate) {
-        return testCombined(predicate);
-    }
-
-    @SafeVarargs
-    private boolean testCombined(Predicate<String>... predicates) {
-        return Stream.of(predicates).allMatch(p -> p.test(value));
-    }
-
-    @SafeVarargs
-    private boolean test(Predicate<String>... predicates) {
-        return Stream.of(predicates).anyMatch(p -> p.test(value));
-    }
-
-    private AssertionError error(String message, Object... objects) {
-        if (objects != null) {
-            message = format(message, objects);
-        }
-        return new AssertionError(message);
-    }
 }

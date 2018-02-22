@@ -1,4 +1,4 @@
-package de.toberkoe.fluentassertions.api.assertions;
+package de.toberkoe.fluentassertions.api;
 
 /**
  * {@code Long} Assertions.

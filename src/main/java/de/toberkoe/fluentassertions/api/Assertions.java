@@ -1,4 +1,4 @@
-package de.toberkoe.fluentassertions.api.assertions;
+package de.toberkoe.fluentassertions.api;
 
 import java.math.BigDecimal;
 
@@ -79,5 +79,15 @@ public class Assertions {
      */
     public static ShortAssert assertThat(Short number) {
         return new ShortAssert(number);
+    }
+
+    /**
+     * Creates an instance of {@link ObjectAssert}.
+     *
+     * @param object the value to be asserted
+     * @return instance of assertion object
+     */
+    public static ObjectAssert assertThat(Object object) {
+        return new ObjectAssert(object);
     }
 }

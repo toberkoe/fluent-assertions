@@ -1,6 +1,5 @@
 package de.toberkoe.fluentassertions.api;
 
-import de.toberkoe.fluentassertions.api.assertions.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
