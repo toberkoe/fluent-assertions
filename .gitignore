@@ -8,6 +8,7 @@
 /build
 /out
 /.gradle
+/gradle
 
 # Compiled class file
 *.class
