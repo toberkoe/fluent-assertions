@@ -90,4 +90,14 @@ public class Assertions {
     public static ObjectAssert assertThat(Object object) {
         return new ObjectAssert(object);
     }
+
+    /**
+     * Creates an instance of {@link BooleanAssert}.
+     *
+     * @param actual the value to be asserted
+     * @return instance of assertion object
+     */
+    public static BooleanAssert assertThat(Boolean actual) {
+        return new BooleanAssert(actual);
+    }
 }
