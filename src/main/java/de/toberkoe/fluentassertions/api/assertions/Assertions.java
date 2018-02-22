@@ -8,12 +8,22 @@ package de.toberkoe.fluentassertions.api.assertions;
 public class Assertions {
 
     /**
-     * Creates an instance of {link StringAssert}.
+     * Creates an instance of {@link StringAssert}.
      *
      * @param string the value to be asserted
      * @return instance of assertion object
      */
     public static StringAssert assertThat(String string) {
         return new StringAssert(string);
+    }
+
+    /**
+     * Creates an instance of {@link IntegerAssert}.
+     *
+     * @param number the value to be asserted
+     * @return instance of assertion object
+     */
+    public static IntegerAssert assertThat(Integer number) {
+        return new IntegerAssert(number);
     }
 }

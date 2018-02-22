@@ -20,125 +20,125 @@ public class StringAssert {
         this.value = value;
     }
 
-    public void isNull() {
+    public StringAssert isNull() {
         if (test(Objects::isNull)) {
-            return;
+            return this;
         }
-        error("Expected to be null but was %s", value);
+        throw error("Expected to be null but was %s", value);
     }
 
-    public void isNotNull() {
+    public StringAssert isNotNull() {
         if (!test(Objects::isNull)) {
-            return;
+            return this;
         }
-        error("Expected to be not null");
+        throw error("Expected to be not null");
     }
 
-    public void isEmpty() {
+    public StringAssert isEmpty() {
         isNotNull();
         if (test(String::isEmpty)) {
-            return;
+            return this;
         }
-        error("Expected to be empty but was %s", value);
+        throw error("Expected to be empty but was %s", value);
     }
 
-    public void isNotEmpty() {
+    public StringAssert isNotEmpty() {
         isNotNull();
         if (!test(String::isEmpty)) {
-            return;
+            return this;
         }
-        error("Expected to be not empty");
+        throw error("Expected to be not empty");
     }
 
-    public void isNullOrEmpty() {
+    public StringAssert isNullOrEmpty() {
         if (test(Objects::isNull, String::isEmpty)) {
-            return;
+            return this;
         }
-        error("Expected to be null or empty");
+        throw error("Expected to be null or empty");
     }
 
-    public void isEqualTo(String expected) {
+    public StringAssert isEqualTo(String expected) {
         if (test(expected::equals)) {
-            return;
+            return this;
         }
 
-        error("Expected to be %s but was %s", expected, value);
+        throw error("Expected to be %s but was %s", expected, value);
     }
 
-    public void isNotEqualTo(String expected) {
+    public StringAssert isNotEqualTo(String expected) {
         if (!test(expected::equals)) {
-            return;
+            return this;
         }
 
-        error("Expected to be not equal to %s", expected);
+        throw error("Expected to be not equal to %s", expected);
     }
 
-    public void isEqualToIgnoringCase(String expected) {
+    public StringAssert isEqualToIgnoringCase(String expected) {
         if (test(expected::equalsIgnoreCase)) {
-            return;
+            return this;
         }
 
-        error("Expected to be %s but was %s", expected, value);
+        throw error("Expected to be %s but was %s", expected, value);
     }
 
-    public void contains(String expected) {
+    public StringAssert contains(String expected) {
         if (test(s -> s.contains(expected))) {
-            return;
+            return this;
         }
 
-        error("Expected %s to contain %s", value, expected);
+        throw error("Expected %s to contain %s", value, expected);
     }
 
-    public void doesNotContain(String expected) {
+    public StringAssert doesNotContain(String expected) {
         if (!test(s -> s.contains(expected))) {
-            return;
+            return this;
         }
 
-        error("Expected %s not to contain %s", value, expected);
+        throw error("Expected %s not to contain %s", value, expected);
     }
 
-    public void startsWith(String expected) {
+    public StringAssert startsWith(String expected) {
         if (test(s -> s.startsWith(expected))) {
-            return;
+            return this;
         }
 
-        error("Expected %s to start with %s", value, expected);
+        throw error("Expected %s to start with %s", value, expected);
     }
 
-    public void endsWith(String expected) {
+    public StringAssert endsWith(String expected) {
         if (test(s -> s.endsWith(expected))) {
-            return;
+            return this;
         }
 
-        error("Expected %s to end with %s", value, expected);
+        throw error("Expected %s to end with %s", value, expected);
     }
 
-    public void matches(String regex) {
+    public StringAssert matches(String regex) {
         if (test(s -> s.matches(regex))) {
-            return;
+            return this;
         }
 
-        error("Expected %s to match regex %s", value, regex);
+        throw error("Expected %s to match regex %s", value, regex);
     }
 
-    public void doesNotMatch(String regex) {
+    public StringAssert doesNotMatch(String regex) {
         if (!test(s -> s.matches(regex))) {
-            return;
+            return this;
         }
 
-        error("Expected %s not to match regex %s", value, regex);
+        throw error("Expected %s not to match regex %s", value, regex);
     }
 
-    public void hasSizeOf(int size) {
+    public StringAssert hasSizeOf(int size) {
         if (test(s -> s.length() == size)) {
-            return;
+            return this;
         }
 
-        error("Expected %s to have length of %f", value, size);
+        throw error("Expected %s to have length of %d", value, size);
     }
 
-    public void hasSameSizeAs(String compareTo) {
-        hasSizeOf(compareTo.length());
+    public StringAssert hasSameSizeAs(String compareTo) {
+        return hasSizeOf(compareTo.length());
     }
 
     private boolean test(Predicate<String> predicate) {
@@ -155,10 +155,10 @@ public class StringAssert {
         return Stream.of(predicates).anyMatch(p -> p.test(value));
     }
 
-    private void error(String message, Object... objects) {
+    private AssertionError error(String message, Object... objects) {
         if (objects != null) {
             message = format(message, objects);
         }
-        throw new AssertionError(message);
+        return new AssertionError(message);
     }
 }
