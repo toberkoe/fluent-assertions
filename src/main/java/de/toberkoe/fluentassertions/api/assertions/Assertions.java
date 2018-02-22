@@ -40,4 +40,14 @@ public class Assertions {
     public static BigDecimalAssert assertThat(BigDecimal number) {
         return new BigDecimalAssert(number);
     }
+
+    /**
+     * Creates an instance of {@link DoubleAssert}.
+     *
+     * @param number the value to be asserted
+     * @return instance of assertion object
+     */
+    public static DoubleAssert assertThat(Double number) {
+        return new DoubleAssert(number);
+    }
 }
