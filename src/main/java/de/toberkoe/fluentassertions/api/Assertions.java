@@ -1,6 +1,7 @@
 package de.toberkoe.fluentassertions.api;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  * Factory class for type-specific assertions.
@@ -99,5 +100,15 @@ public class Assertions {
      */
     public static BooleanAssert assertThat(Boolean actual) {
         return new BooleanAssert(actual);
+    }
+
+    /**
+     * Creates an instance of {@link OptionalAssert}.
+     *
+     * @param actual the value to be asserted
+     * @return instance of assertion object
+     */
+    public static OptionalAssert assertThat(Optional<?> actual) {
+        return new OptionalAssert(actual);
     }
 }
