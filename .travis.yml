@@ -1,0 +1,24 @@
+language: java
+sudo: false
+before_install:
+ - chmod +x gradlew
+install: true
+
+addons:
+  sonarcloud:
+    organization: "toberkoe-github"
+    token:
+      secure: $SONAR_TOKEN
+
+jdk:
+  - oraclejdk9
+
+script:
+  - ./gradlew clean test jacocoJUnit5TestReport sonarqube
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'
