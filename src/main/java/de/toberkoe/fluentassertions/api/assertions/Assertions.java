@@ -60,4 +60,14 @@ public class Assertions {
     public static LongAssert assertThat(Long number) {
         return new LongAssert(number);
     }
+
+    /**
+     * Creates an instance of {@link FloatAssert}.
+     *
+     * @param number the value to be asserted
+     * @return instance of assertion object
+     */
+    public static FloatAssert assertThat(Float number) {
+        return new FloatAssert(number);
+    }
 }
