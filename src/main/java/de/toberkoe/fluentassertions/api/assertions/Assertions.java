@@ -70,4 +70,14 @@ public class Assertions {
     public static FloatAssert assertThat(Float number) {
         return new FloatAssert(number);
     }
+
+    /**
+     * Creates an instance of {@link ShortAssert}.
+     *
+     * @param number the value to be asserted
+     * @return instance of assertion object
+     */
+    public static ShortAssert assertThat(Short number) {
+        return new ShortAssert(number);
+    }
 }
