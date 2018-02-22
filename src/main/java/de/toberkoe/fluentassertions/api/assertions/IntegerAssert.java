@@ -40,6 +40,48 @@ public class IntegerAssert {
         throw error("Expected to be positive but was %d", value);
     }
 
+    public IntegerAssert isLessThan(Integer givenValue) {
+        if (test(v -> v < givenValue)) {
+            return this;
+        }
+        throw error("Expected %d to be less than %d", value, givenValue);
+    }
+
+    public IntegerAssert isGreaterThan(Integer givenValue) {
+        if (test(v -> v > givenValue)) {
+            return this;
+        }
+        throw error("Expected %d to be greater than %d", value, givenValue);
+    }
+
+    public IntegerAssert isEqualTo(Integer givenValue) {
+        if (test(v -> v.equals(givenValue))) {
+            return this;
+        }
+        throw error("Expected %d to be equal to %d", value, givenValue);
+    }
+
+    public IntegerAssert isNotEqualTo(Integer givenValue) {
+        if (!test(v -> v.equals(givenValue))) {
+            return this;
+        }
+        throw error("Expected %d to be not equal to %d", value, givenValue);
+    }
+
+    public IntegerAssert isLessThanOrEqualTo(Integer givenValue) {
+        if (test(v -> v < givenValue, v -> v.equals(givenValue))) {
+            return this;
+        }
+        throw error("Expected %d to be less than or equal to %d", value, givenValue);
+    }
+
+    public IntegerAssert isGreaterThanOrEqualTo(Integer givenValue) {
+        if (test(v -> v > givenValue, v -> v.equals(givenValue))) {
+            return this;
+        }
+        throw error("Expected %d to be greater than or equal to %d", value, givenValue);
+    }
+
     private boolean test(Predicate<Integer> predicate) {
         return testCombined(predicate);
     }
