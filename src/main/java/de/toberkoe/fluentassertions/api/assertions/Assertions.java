@@ -1,11 +1,15 @@
 package de.toberkoe.fluentassertions.api.assertions;
 
+import java.math.BigDecimal;
+
 /**
  * Factory class for type-specific assertions.
  *
  * @author t.bertram-koehler
  */
 public class Assertions {
+
+    private Assertions() {}
 
     /**
      * Creates an instance of {@link StringAssert}.
@@ -25,5 +29,15 @@ public class Assertions {
      */
     public static IntegerAssert assertThat(Integer number) {
         return new IntegerAssert(number);
+    }
+
+    /**
+     * Creates an instance of {@link BigDecimalAssert}.
+     *
+     * @param number the value to be asserted
+     * @return instance of assertion object
+     */
+    public static BigDecimalAssert assertThat(BigDecimal number) {
+        return new BigDecimalAssert(number);
     }
 }
