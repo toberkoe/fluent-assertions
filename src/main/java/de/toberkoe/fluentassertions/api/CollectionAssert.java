@@ -8,9 +8,9 @@ import java.util.Collection;
  *
  * @author t.bertram-koehler
  */
-public class CollectionAssert extends AbstractCollectionAssert<CollectionAssert, Collection> {
+public class CollectionAssert<E> extends AbstractCollectionAssert<CollectionAssert<E>, Collection<E>> {
 
-    protected CollectionAssert(Collection value) {
+    protected CollectionAssert(Collection<E> value) {
         super(value);
     }
 

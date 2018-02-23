@@ -1,10 +1,7 @@
 package de.toberkoe.fluentassertions.api;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Factory class for type-specific assertions.
@@ -111,8 +108,8 @@ public class Assertions {
      * @param actual the value to be asserted
      * @return instance of assertion object
      */
-    public static OptionalAssert assertThat(Optional<?> actual) {
-        return new OptionalAssert(actual);
+    public static <E> OptionalAssert<E> assertThat(Optional<E> actual) {
+        return new OptionalAssert<>(actual);
     }
 
     /**
@@ -121,8 +118,8 @@ public class Assertions {
      * @param collection the value to be asserted
      * @return instance of assertion object
      */
-    public static CollectionAssert assertThat(Collection collection) {
-        return new CollectionAssert(collection);
+    public static <E> CollectionAssert<E> assertThat(Collection<E> collection) {
+        return new CollectionAssert<>(collection);
     }
 
     /**
@@ -143,5 +140,15 @@ public class Assertions {
      */
     public static <E> SetAssert<E> assertThat(Set<E> collection) {
         return new SetAssert<>(collection);
+    }
+
+    /**
+     * Creates an instance of {@link MapAssert}.
+     *
+     * @param collection the value to be asserted
+     * @return instance of assertion object
+     */
+    public static <K, V> MapAssert<K, V> assertThat(Map<K, V> collection) {
+        return new MapAssert<>(collection);
     }
 }
