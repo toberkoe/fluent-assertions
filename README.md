@@ -36,4 +36,4 @@ dependencies {
 
 ## How to use
 
-[current release]: https://github.com/toberkoe/fluent-assertions/releases/tag/v0.1
+[current release]: https://github.com/toberkoe/fluent-assertions/releases/tag/0.1
