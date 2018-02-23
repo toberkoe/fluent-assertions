@@ -3,6 +3,7 @@ package de.toberkoe.fluentassertions.api;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,7 +12,7 @@ class CollectionAssertTest {
 
     @Test
     void testIsEmpty() {
-        Assertions.assertThat(List.of()).isEmpty();
+        Assertions.assertThat((Collection) List.of()).isEmpty();
         assertThrows(AssertionError.class, () -> Assertions.assertThat(List.of(1)).isEmpty());
     }
 

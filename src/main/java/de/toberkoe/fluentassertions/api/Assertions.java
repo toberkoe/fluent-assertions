@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Factory class for type-specific assertions.
@@ -132,5 +133,15 @@ public class Assertions {
      */
     public static <E> ListAssert<E> assertThat(List<E> collection) {
         return new ListAssert<>(collection);
+    }
+
+    /**
+     * Creates an instance of {@link SetAssert}.
+     *
+     * @param collection the value to be asserted
+     * @return instance of assertion object
+     */
+    public static <E> SetAssert<E> assertThat(Set<E> collection) {
+        return new SetAssert<>(collection);
     }
 }

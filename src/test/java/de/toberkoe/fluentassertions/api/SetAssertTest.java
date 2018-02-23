@@ -3,18 +3,16 @@ package de.toberkoe.fluentassertions.api;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import static java.util.Comparator.comparing;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ListAssertTest {
+class SetAssertTest {
 
-    private List<Integer> nullList = null;
-    private List<Integer> empty = List.of();
-    private List<Integer> entries = List.of(1, 2, 3, 4, 5);
-    private List<Integer> otherEntries = List.of(8, 9, 10);
+    private Set<Integer> nullSet = null;
+    private Set<Integer> empty = Set.of();
+    private Set<Integer> entries = Set.of(1, 2, 3, 4, 5);
+    private Set<Integer> otherEntries = Set.of(8, 9, 10);
 
     @Test
     void testIsEmpty() {
@@ -30,7 +28,7 @@ class ListAssertTest {
 
     @Test
     void testIsNullOrEmpty() {
-        Assertions.assertThat(nullList).isNullOrEmpty();
+        Assertions.assertThat(nullSet).isNullOrEmpty();
         Assertions.assertThat(empty).isNullOrEmpty();
         assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isNullOrEmpty());
     }
@@ -114,19 +112,19 @@ class ListAssertTest {
     @Test
     void testDoesNotHaveDuplicates() {
         Assertions.assertThat(entries).doesNotHaveDuplicates();
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(List.of(1, 1, 1)).doesNotHaveDuplicates());
+        //not possible on sets
     }
 
     @Test
     void testIsNull() {
-        Assertions.assertThat(nullList).isNull();
+        Assertions.assertThat(nullSet).isNull();
         assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isNull());
     }
 
     @Test
     void testIsNotNull() {
         Assertions.assertThat(entries).isNotNull();
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(nullList).isNotNull());
+        assertThrows(AssertionError.class, () -> Assertions.assertThat(nullSet).isNotNull());
     }
 
     @Test
@@ -155,45 +153,25 @@ class ListAssertTest {
 
     @Test
     void testIsInstanceOf() {
-        Assertions.assertThat(entries).isInstanceOf(List.class);
+        Assertions.assertThat(entries).isInstanceOf(Set.class);
         assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isInstanceOf(String.class));
     }
 
     @Test
     void testIsNotInstanceOf() {
         Assertions.assertThat(entries).isNotInstanceOf(String.class);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isNotInstanceOf(List.class));
+        assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isNotInstanceOf(Set.class));
     }
 
     @Test
     void testIsInstanceOfAny() {
-        Assertions.assertThat(entries).isInstanceOfAny(List.class);
+        Assertions.assertThat(entries).isInstanceOfAny(Set.class);
         assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isInstanceOfAny(String.class));
     }
 
     @Test
     void testIsNotInstanceOfAny() {
         Assertions.assertThat(entries).isNotInstanceOfAny(String.class);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isNotInstanceOfAny(List.class));
-    }
-
-    @Test
-    void testIsSorted() {
-        Assertions.assertThat(List.of(1, 2, 3, 4, 5)).isSorted();
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(List.of(2, 1, 3)).isSorted());
-    }
-
-    @Test
-    void testIsSortedBy() {
-        Assertions.assertThat(List.of("", "a", "ab", "abc")).isSortedBy(comparing(String::length));
-        Assertions.assertThat(List.of("", "a", "ab", "abc")).isSortedBy(String::length);
-        Assertions.assertThat(List.of("", "a", "ab", "abc")).isSortedBy(String::length, String::length);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(List.of("ab", "c", "x")).isSortedBy(String::length));
-    }
-
-    @Test
-    void testIsUnsorted() {
-        Assertions.assertThat(List.of(1, 5, 3)).isUnsorted();
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(List.of(1, 2, 3)).isUnsorted());
+        assertThrows(AssertionError.class, () -> Assertions.assertThat(entries).isNotInstanceOfAny(Set.class));
     }
 }

@@ -10,6 +10,10 @@ import java.util.stream.Stream;
  */
 public class AbstractCollectionAssert<S extends AbstractCollectionAssert<S, C>, C extends Collection> extends AbstractObjectAssert<S, C> {
 
+    private enum Position {
+        UNKNOWN, START, END
+    }
+
     protected AbstractCollectionAssert(C value) {
         super(value);
     }
@@ -94,15 +98,38 @@ public class AbstractCollectionAssert<S extends AbstractCollectionAssert<S, C>, 
 
     public S containsSequence(Object... objects) {
         containsAllOf(objects);
+        return isSublistAsExpected(Position.UNKNOWN, objects);
+    }
+
+    private S isSublistAsExpected(Position position, Object[] objects) {
         List list = new ArrayList<>(value);
-        int start = list.indexOf(objects[0]);
-        int end = list.indexOf(objects[objects.length - 1]) + 1;
+        if (value instanceof Set) {
+            Collections.sort(list);
+        }
+
+        int start = 0;
+        int end = 0;
+        switch (position) {
+            case START:
+                start = 0;
+                end = list.indexOf(objects[objects.length - 1]) + 1;
+                break;
+            case UNKNOWN:
+                start = list.indexOf(objects[0]);
+                end = list.indexOf(objects[objects.length - 1]) + 1;
+                break;
+            case END:
+                start = list.lastIndexOf(objects[0]);
+                end = list.size();
+                break;
+        }
 
         List sequence = list.subList(start, end > list.size() ? list.size() : end);
         if (Objects.deepEquals(sequence, Arrays.asList(objects))) {
             return instance;
         }
-        throw error("Expected to contain sequence %s", Arrays.asList(objects));
+
+        throw error("Expected to contain sequence %s", sequence);
     }
 
     public S startsWith(Object... objects) {
@@ -110,14 +137,7 @@ public class AbstractCollectionAssert<S extends AbstractCollectionAssert<S, C>, 
             return containsOnly(objects);
         }
         containsAllOf(objects);
-
-        List list = new ArrayList<>(value);
-        int end = list.indexOf(objects[objects.length - 1]) + 1;
-        Collection subList = list.subList(0, end > list.size() ? list.size() : end);
-        if (Objects.deepEquals(subList, Arrays.asList(objects))) {
-            return instance;
-        }
-        throw error("Expected to start with %s but started with %s", Arrays.asList(objects), subList);
+        return isSublistAsExpected(Position.START, objects);
     }
 
     public S endsWith(Object... objects) {
@@ -125,14 +145,7 @@ public class AbstractCollectionAssert<S extends AbstractCollectionAssert<S, C>, 
             return containsOnly(objects);
         }
         containsAllOf(objects);
-
-        List list = new ArrayList<>(value);
-        int start = list.lastIndexOf(objects[0]);
-        Collection subList = list.subList(start, list.size());
-        if (Objects.deepEquals(subList, Arrays.asList(objects))) {
-            return instance;
-        }
-        throw error("Expected to end with %s but ended with %s", Arrays.asList(objects), subList);
+        return isSublistAsExpected(Position.END, objects);
     }
 
     public S doesNotHaveDuplicates() {
