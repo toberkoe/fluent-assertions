@@ -34,6 +34,21 @@ dependencies {
 }
 ```
 
-## How to use
+## Examples
+Use ```java de.toberkoe.fluentassertions.api.Assertions#assertThat``` as entry point for type-specific fluent assertions.
+To make tests more readable, it is recommendend to access this class as a static import.
+
+```java
+...
+import static de.toberkoe.fluentassertions.api.Assertions.assertThat;
+...
+
+List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+assertThat(numbers)
+  .isNotEmpty()
+  .hasSizeOf(5)
+  .startsWith(1, 2, 3)
+  .doesNotHaveDuplicates();
+```
 
 [current release]: https://github.com/toberkoe/fluent-assertions/releases/tag/0.1
