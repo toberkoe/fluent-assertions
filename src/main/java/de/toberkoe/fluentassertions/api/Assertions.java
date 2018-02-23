@@ -1,6 +1,7 @@
 package de.toberkoe.fluentassertions.api;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -110,5 +111,15 @@ public class Assertions {
      */
     public static OptionalAssert assertThat(Optional<?> actual) {
         return new OptionalAssert(actual);
+    }
+
+    /**
+     * Creates an instance of {@link CollectionAssert}.
+     *
+     * @param collection the value to be asserted
+     * @return instance of assertion object
+     */
+    public static CollectionAssert assertThat(Collection collection) {
+        return new CollectionAssert(collection);
     }
 }
