@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.11.0"
     }
 }
 
@@ -17,6 +18,9 @@ version '0.1'
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'maven'
+apply plugin: 'io.codearte.nexus-staging'
+apply plugin: 'signing'
 
 sourceCompatibility = 9.0
 targetCompatibility = 9.0
@@ -65,3 +69,71 @@ afterEvaluate {
 
     check.dependsOn jacocoJUnit5TestReport
 }
+
+subprojects {
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives javadocJar, sourcesJar
+    }
+}
+
+allprojects {
+    signing {
+        sign configurations.archives
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUser, password: ossrhPassword)
+                }
+                pom.project {
+                    name project.name
+                    description project.description
+                    packaging 'jar'
+                    url 'https://github.com/toberkoe/fluent-assertions'
+
+                    scm {
+                        connection 'scm:git:https://github.com/toberkoe/fluent-assertions.git'
+                        developerConnection 'scm:git:github.com/toberkoe/fluent-assertions.git'
+                        url 'https://github.com/toberkoe/fluent-assertions.git'
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'tbk'
+                            name = 'Tobias Bertram-Köhler'
+                            email = 't.bertramkoehler@mail.com'
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    nexusStaging {
+        username = ossrhUser
+        password = ossrhPassword
+    }
+}
+
