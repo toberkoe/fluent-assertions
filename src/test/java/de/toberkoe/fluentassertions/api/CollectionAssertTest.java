@@ -91,6 +91,7 @@ class CollectionAssertTest {
     void testContainsSequence() {
         Assertions.assertThat(List.of(1, 2, 3, 4, 5)).containsSequence(2, 3);
         assertThrows(AssertionError.class, () -> Assertions.assertThat(List.of(1, 2, 3)).containsSequence(4, 5));
+        assertThrows(AssertionError.class, () -> Assertions.assertThat(List.of(1, 2, 3, 4, 5)).containsSequence(2, 4, 3, 5));
     }
 
     @Test

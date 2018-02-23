@@ -2,6 +2,7 @@ package de.toberkoe.fluentassertions.api;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -121,5 +122,15 @@ public class Assertions {
      */
     public static CollectionAssert assertThat(Collection collection) {
         return new CollectionAssert(collection);
+    }
+
+    /**
+     * Creates an instance of {@link ListAssert}.
+     *
+     * @param collection the value to be asserted
+     * @return instance of assertion object
+     */
+    public static <E> ListAssert<E> assertThat(List<E> collection) {
+        return new ListAssert<>(collection);
     }
 }
