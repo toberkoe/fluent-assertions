@@ -34,3 +34,5 @@ hs_err_pid*
 *.gpg
 gradle.properties
 *.kbx
+*.asc
+*.pgp

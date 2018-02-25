@@ -25,6 +25,9 @@ apply plugin: 'signing'
 sourceCompatibility = 9.0
 targetCompatibility = 9.0
 
+def user = hasProperty('ossrhUser') ? ossrhUser : System.getenv('ossrhUser')
+def passphrase = hasProperty('ossrhPassword') ? ossrhPassword : System.getenv('ossrhPassword')
+
 repositories {
     mavenCentral()
 }
@@ -70,21 +73,18 @@ afterEvaluate {
     check.dependsOn jacocoJUnit5TestReport
 }
 
-subprojects {
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
 
-    task javadocJar(type: Jar) {
-        classifier = 'javadoc'
-        from javadoc
-    }
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
 
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    artifacts {
-        archives javadocJar, sourcesJar
-    }
+artifacts {
+    archives javadocJar, sourcesJar
 }
 
 allprojects {
@@ -132,8 +132,8 @@ allprojects {
     }
 
     nexusStaging {
-        username = ossrhUser
-        password = ossrhPassword
+        username = user
+        password = passphrase
     }
 }
 
