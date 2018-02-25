@@ -25,9 +25,6 @@ apply plugin: 'signing'
 sourceCompatibility = 9.0
 targetCompatibility = 9.0
 
-def user = hasProperty('ossrhUser') ? ossrhUser : System.getenv('ossrhUser')
-def passphrase = hasProperty('ossrhPassword') ? ossrhPassword : System.getenv('ossrhPassword')
-
 repositories {
     mavenCentral()
 }
@@ -132,8 +129,8 @@ allprojects {
     }
 
     nexusStaging {
-        username = user
-        password = passphrase
+        username = hasProperty('ossrhUser') ? ossrhUser : System.getenv('ossrhUser')
+        password = hasProperty('ossrhPassword') ? ossrhPassword : System.getenv('ossrhPassword')
     }
 }
 

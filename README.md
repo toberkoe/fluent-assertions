@@ -3,8 +3,7 @@
 [![Build Status](https://secure.travis-ci.org/toberkoe/fluent-assertions.png)](http://travis-ci.org/toberkoe/fluent-assertions) 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=de.toberkoe%3Afluent-assertions&metric=coverage)](https://sonarcloud.io/dashboard?id=de.toberkoe%3Afluent-assertions) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=de.toberkoe%3Afluent-assertions&metric=alert_status)](https://sonarcloud.io/dashboard?id=de.toberkoe%3Afluent-assertions)
-
-[//]: # (add badges for maven central) 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.toberkoe/fluent-assertions/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.toberkoe/fluent-assertions)
 
 Set of Fluent Assertions for Unit Tests. 
 Inspired by [FEST Fluent Assertions 2.x](https://github.com/alexruiz/fest-assert-2.x).
@@ -35,11 +34,10 @@ dependencies {
 ```
 
 ## Examples
-Use ```java de.toberkoe.fluentassertions.api.Assertions#assertThat``` as entry point for type-specific fluent assertions.
+Use ```de.toberkoe.fluentassertions.api.Assertions#assertThat``` as entry point for type-specific fluent assertions.
 To make tests more readable, it is recommendend to access this class as a static import.
 
 ```java
-...
 import static de.toberkoe.fluentassertions.api.Assertions.assertThat;
 ...
 
