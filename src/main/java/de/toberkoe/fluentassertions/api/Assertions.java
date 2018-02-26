@@ -10,7 +10,8 @@ import java.util.*;
  */
 public class Assertions {
 
-    private Assertions() {}
+    private Assertions() {
+    }
 
     /**
      * Creates an instance of {@link StringAssert}.
@@ -106,6 +107,7 @@ public class Assertions {
      * Creates an instance of {@link OptionalAssert}.
      *
      * @param actual the value to be asserted
+     * @param <E>    type of optional value
      * @return instance of assertion object
      */
     public static <E> OptionalAssert<E> assertThat(Optional<E> actual) {
@@ -116,6 +118,7 @@ public class Assertions {
      * Creates an instance of {@link CollectionAssert}.
      *
      * @param collection the value to be asserted
+     * @param <E>        type of value
      * @return instance of assertion object
      */
     public static <E> CollectionAssert<E> assertThat(Collection<E> collection) {
@@ -126,6 +129,7 @@ public class Assertions {
      * Creates an instance of {@link ListAssert}.
      *
      * @param collection the value to be asserted
+     * @param <E>        type of value
      * @return instance of assertion object
      */
     public static <E> ListAssert<E> assertThat(List<E> collection) {
@@ -136,6 +140,7 @@ public class Assertions {
      * Creates an instance of {@link SetAssert}.
      *
      * @param collection the value to be asserted
+     * @param <E>        type of value
      * @return instance of assertion object
      */
     public static <E> SetAssert<E> assertThat(Set<E> collection) {
@@ -146,6 +151,8 @@ public class Assertions {
      * Creates an instance of {@link MapAssert}.
      *
      * @param collection the value to be asserted
+     * @param <K>        type of key
+     * @param <V>        type of value
      * @return instance of assertion object
      */
     public static <K, V> MapAssert<K, V> assertThat(Map<K, V> collection) {

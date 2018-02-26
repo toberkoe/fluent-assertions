@@ -130,7 +130,7 @@ public abstract class AbstractObjectAssert<S extends AbstractObjectAssert<S, T>,
     @SafeVarargs
     protected final AssertionError error(String message, Object... objects) {
         if (objects != null) {
-            message = format(message, Stream.of(objects)
+            message = format(message, (Object[]) Stream.of(objects)
                     .map(this::formatObject).toArray(String[]::new));
         }
         return new AssertionError(message);
