@@ -10,10 +10,10 @@ Inspired by [FEST Fluent Assertions 2.x](https://github.com/alexruiz/fest-assert
 
 ## Latest release
 
-The most recent release is [fluent-assertions 0.1][current release], released 2018-02-23.
+The most recent release is [fluent-assertions 0.2][current release], released 2018-02-26.
 
 The Maven group ID is `de.toberkoe`, and the artifact ID is `fluent-assertions`. Use
-version `0.1` for the current version.
+version `0.2` for the current version.
 
 To add a dependency on fluent-assertions using Maven, use the following:
 
@@ -21,7 +21,7 @@ To add a dependency on fluent-assertions using Maven, use the following:
 <dependency>
   <groupId>de.toberkoe</groupId>
   <artifactId>fluent-assertions</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
 </dependency>
 ```
 
@@ -29,7 +29,7 @@ To add a dependency using Gradle:
 
 ```
 dependencies {
-  testCompile 'de.toberkoe:fluent-assertions:0.1'
+  testImplementation 'de.toberkoe:fluent-assertions:0.2'
 }
 ```
 
@@ -49,4 +49,4 @@ assertThat(numbers)
   .doesNotHaveDuplicates();
 ```
 
-[current release]: https://github.com/toberkoe/fluent-assertions/releases/tag/0.1
+[current release]: https://github.com/toberkoe/fluent-assertions/releases/tag/0.2
