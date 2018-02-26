@@ -84,10 +84,12 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
+signing {
+    sign configurations.archives
+}
+
 allprojects {
-    signing {
-        sign configurations.archives
-    }
+
 
     uploadArchives {
         repositories {
@@ -129,8 +131,8 @@ allprojects {
     }
 
     nexusStaging {
-        username = hasProperty('ossrhUser') ? ossrhUser : System.getenv('ossrhUser')
-        password = hasProperty('ossrhPassword') ? ossrhPassword : System.getenv('ossrhPassword')
+        username = ossrhUser
+        password = ossrhPassword
     }
 }
 
