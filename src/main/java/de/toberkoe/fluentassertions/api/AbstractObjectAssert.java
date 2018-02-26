@@ -39,15 +39,19 @@ public abstract class AbstractObjectAssert<S extends AbstractObjectAssert<S, T>,
     }
 
     public S isEqualTo(T expected) {
-        if (test(expected::equals)) {
+        if (test(v -> Objects.equals(v, expected))) {
             return instance;
         }
 
-        throw error("Expected to be %s but was %s", expected, value);
+        if (value == null) {
+            throw error("Expected to be %s but was null", expected);
+        } else {
+            throw error("Expected to be %s but was %s", expected, value);
+        }
     }
 
     public S isNotEqualTo(T expected) {
-        if (!test(expected::equals)) {
+        if (!test(v -> Objects.equals(v, expected))) {
             return instance;
         }
 

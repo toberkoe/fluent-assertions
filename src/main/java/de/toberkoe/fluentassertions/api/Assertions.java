@@ -151,4 +151,14 @@ public class Assertions {
     public static <K, V> MapAssert<K, V> assertThat(Map<K, V> collection) {
         return new MapAssert<>(collection);
     }
+
+    /**
+     * Creates an instance of {@link ThrowableAssert}.
+     *
+     * @param throwable the value to be asserted
+     * @return instance of assertion object
+     */
+    public static ThrowableAssert assertThat(Throwable throwable) {
+        return new ThrowableAssert(throwable);
+    }
 }
