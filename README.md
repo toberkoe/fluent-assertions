@@ -22,6 +22,7 @@ To add a dependency on fluent-assertions using Maven, use the following:
   <groupId>de.toberkoe</groupId>
   <artifactId>fluent-assertions</artifactId>
   <version>0.2</version>
+  <scope>test</scope>
 </dependency>
 ```
 
