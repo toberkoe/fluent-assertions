@@ -1,5 +1,16 @@
 package de.toberkoe.fluentassertions.api;
 
+import de.toberkoe.fluentassertions.api.arrays.BooleanArrayAssert;
+import de.toberkoe.fluentassertions.api.arrays.IntegerArrayAssert;
+import de.toberkoe.fluentassertions.api.arrays.LongArrayAssert;
+import de.toberkoe.fluentassertions.api.arrays.ObjectArrayAssert;
+import de.toberkoe.fluentassertions.api.collections.CollectionAssert;
+import de.toberkoe.fluentassertions.api.collections.ListAssert;
+import de.toberkoe.fluentassertions.api.collections.MapAssert;
+import de.toberkoe.fluentassertions.api.collections.SetAssert;
+import de.toberkoe.fluentassertions.api.numbers.*;
+import de.toberkoe.fluentassertions.api.objects.*;
+
 import java.math.BigDecimal;
 import java.util.*;
 
