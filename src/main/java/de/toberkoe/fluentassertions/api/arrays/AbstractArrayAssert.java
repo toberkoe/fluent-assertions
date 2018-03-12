@@ -99,33 +99,29 @@ public abstract class AbstractArrayAssert<S extends AbstractArrayAssert<S, T>, T
     }
 
     @SafeVarargs
-    public final S containsSequence(T... objects) {
-        containsAllOf(objects);
+    public final S containsSequence(T... expectedSequence) {
+        containsAllOf(expectedSequence);
 
-        T first = objects[0];
-        T last = objects[objects.length - 1];
+        T first = expectedSequence[0];
+        T last = expectedSequence[expectedSequence.length - 1];
+
         for (int i = 0; i < value.length; i++) {
-            T actual = value[i];
-            if (!Objects.equals(actual, first)) {
-                continue;
-            }
-
-            int endOfSequence = i + objects.length - 1;
+            int endOfSequence = i + expectedSequence.length - 1;
             if (endOfSequence >= value.length) {
-                throw error("Expected to contain sequence %s", Arrays.toString(objects));
+                throw error("Expected to contain sequence %s", Arrays.toString(expectedSequence));
             }
 
+            T actual = value[i];
             T possibleEnd = value[endOfSequence];
-            if (!Objects.equals(possibleEnd, last)) {
-                continue;
-            }
 
-            T[] possibleSequence = Arrays.copyOfRange(value, i, endOfSequence + 1);
-            if (Arrays.deepEquals(possibleSequence, objects)) {
-                return instance;
+            if (Objects.equals(actual, first) && Objects.equals(possibleEnd, last)) {
+                T[] possibleSequence = Arrays.copyOfRange(value, i, endOfSequence + 1);
+                if (Arrays.deepEquals(possibleSequence, expectedSequence)) {
+                    return instance;
+                }
             }
         }
-        throw error("Expected to contain sequence %s", Arrays.toString(objects));
+        throw error("Expected to contain sequence %s", Arrays.toString(expectedSequence));
     }
 
     @SafeVarargs

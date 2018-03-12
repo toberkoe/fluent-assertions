@@ -4,6 +4,8 @@ import static de.toberkoe.fluentassertions.api.Assertions.assertThat;
 
 public class ThrowableAssert extends AbstractObjectAssert<ThrowableAssert, Throwable> {
 
+    private static final String ERROR_EXPECTED_CAUSE = "Expected %s to have any cause";
+
     public ThrowableAssert(Throwable value) {
         super(value);
     }
@@ -38,7 +40,7 @@ public class ThrowableAssert extends AbstractObjectAssert<ThrowableAssert, Throw
 
     public ThrowableAssert isCauseMessageEqualTo(String expectedMessage) {
         if (value.getCause() == null) {
-            throw error("Expected %s to have any cause", value);
+            throw error(ERROR_EXPECTED_CAUSE, value);
         }
 
         try {
@@ -51,7 +53,7 @@ public class ThrowableAssert extends AbstractObjectAssert<ThrowableAssert, Throw
 
     public ThrowableAssert isCauseMessageNotEqualTo(String expectedMessage) {
         if (value.getCause() == null) {
-            throw error("Expected %s to have any cause", value);
+            throw error(ERROR_EXPECTED_CAUSE, value);
         }
 
         try {
@@ -64,7 +66,7 @@ public class ThrowableAssert extends AbstractObjectAssert<ThrowableAssert, Throw
 
     public ThrowableAssert containsCauseMessage(String expectedMessage) {
         if (value.getCause() == null) {
-            throw error("Expected %s to have any cause", value);
+            throw error(ERROR_EXPECTED_CAUSE, value);
         }
 
         try {
@@ -77,7 +79,7 @@ public class ThrowableAssert extends AbstractObjectAssert<ThrowableAssert, Throw
 
     public ThrowableAssert doesNotContainCauseMessage(String expectedMessage) {
         if (value.getCause() == null) {
-            throw error("Expected %s to have any cause", value);
+            throw error(ERROR_EXPECTED_CAUSE, value);
         }
 
         try {
