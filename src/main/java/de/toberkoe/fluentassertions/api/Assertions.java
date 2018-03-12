@@ -168,4 +168,15 @@ public class Assertions {
     public static ThrowableAssert assertThat(Throwable throwable) {
         return new ThrowableAssert(throwable);
     }
+
+    /**
+     * Creates an instance of {@link ObjectArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static ObjectArrayAssert assertThat(Object[] array) {
+        return new ObjectArrayAssert(array);
+    }
+
 }
