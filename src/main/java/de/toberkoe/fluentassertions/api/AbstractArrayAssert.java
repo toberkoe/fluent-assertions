@@ -1,7 +1,10 @@
 package de.toberkoe.fluentassertions.api;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Abstract Assertions for {@code Arrays}
@@ -11,16 +14,8 @@ import java.util.stream.Stream;
 public abstract class AbstractArrayAssert<S extends AbstractArrayAssert<S, T>, T> extends AbstractObjectAssert<S, T[]> {
 
     //TODO tests for:
-    //assertion classes for primitives: boolean[], int[], long[], double[], byte[]
-
-    //TODO implement these methods:
-    //isSorted
-    //isUnsorted
-    //isSortedBy
-
-    private enum Position {
-        UNKNOWN, START, END
-    }
+    //assertion classes for primitives: int[], long[], double[], byte[]
+    //isSortedBy extensions for String[], Boolean[], Integer[], Double[], Long[]
 
     protected AbstractArrayAssert(T[] value) {
         super(value);
@@ -108,7 +103,31 @@ public abstract class AbstractArrayAssert<S extends AbstractArrayAssert<S, T>, T
     @SafeVarargs
     public final S containsSequence(T... objects) {
         containsAllOf(objects);
-        return isSublistAsExpected(Position.UNKNOWN, objects);
+
+        T first = objects[0];
+        T last = objects[objects.length - 1];
+        for (int i = 0; i < value.length; i++) {
+            T actual = value[i];
+            if (!Objects.equals(actual, first)) {
+                continue;
+            }
+
+            int endOfSequence = i + objects.length - 1;
+            if (endOfSequence >= value.length) {
+                throw error("Expected to contain sequence %s", Arrays.toString(objects));
+            }
+
+            T possibleEnd = value[endOfSequence];
+            if (!Objects.equals(possibleEnd, last)) {
+                continue;
+            }
+
+            T[] possibleSequence = Arrays.copyOfRange(value, i, endOfSequence + 1);
+            if (Arrays.deepEquals(possibleSequence, objects)) {
+                return instance;
+            }
+        }
+        throw error("Expected to contain sequence %s", Arrays.toString(objects));
     }
 
     @SafeVarargs
@@ -117,7 +136,13 @@ public abstract class AbstractArrayAssert<S extends AbstractArrayAssert<S, T>, T
             return containsOnly(objects);
         }
         containsAllOf(objects);
-        return isSublistAsExpected(Position.START, objects);
+
+        for (int i = 0; i < objects.length; i++) {
+            if (!Objects.equals(value[i], objects[i])) {
+                throw error("Expected to start with %s", Arrays.toString(objects));
+            }
+        }
+        return instance;
     }
 
     @SafeVarargs
@@ -126,42 +151,55 @@ public abstract class AbstractArrayAssert<S extends AbstractArrayAssert<S, T>, T
             return containsOnly(objects);
         }
         containsAllOf(objects);
-        return isSublistAsExpected(Position.END, objects);
+        for (int i = 0; i < objects.length; i++) {
+            T actual = value[value.length - 1 - i];
+            T expected = objects[objects.length - 1 - i];
+            if (!Objects.equals(actual, expected)) {
+                throw error("Expected to end with %s", Arrays.toString(objects));
+            }
+        }
+        return instance;
     }
 
     public S doesNotHaveDuplicates() {
-        //FIXME throw exception if not implementing comparable?
         List<T> list = List.of(value);
         Set<T> set = new HashSet<>(list);
         return hasSizeOf(set.size());
     }
 
-    private S isSublistAsExpected(Position position, T[] objects) {
-        List<T> list = Arrays.asList(value);
-
-        int start = 0;
-        int end = 0;
-        switch (position) {
-            case START:
-                start = 0;
-                end = list.indexOf(objects[objects.length - 1]) + 1;
-                break;
-            case UNKNOWN:
-                start = list.indexOf(objects[0]);
-                end = list.indexOf(objects[objects.length - 1]) + 1;
-                break;
-            case END:
-                start = list.lastIndexOf(objects[0]);
-                end = list.size();
-                break;
-        }
-
-        List sequence = list.subList(start, end > list.size() ? list.size() : end);
-        if (Objects.deepEquals(sequence, Arrays.asList(objects))) {
+    public S isSorted() {
+        List<T> list = Stream.of(value).sorted().collect(toList());
+        if (Objects.deepEquals(Arrays.asList(value), list)) {
             return instance;
         }
+        throw error("Expected %s to be sorted", Arrays.toString(value));
+    }
 
-        throw error("Expected to contain sequence %s", sequence);
+    public S isSortedBy(Comparator<T> comparator) {
+        List<T> list = Stream.of(value).sorted(comparator).collect(toList());
+        if (Objects.deepEquals(Arrays.asList(value), list)) {
+            return instance;
+        }
+        throw error("Expected %s to be sorted by %s", Arrays.toString(value), comparator);
+    }
+
+    @SafeVarargs
+    public final S isSortedBy(Function<T, Integer> function, Function<T, Integer>... functions) {
+        Comparator<T> comparator = Comparator.comparing(function);
+        if (functions != null) {
+            for (Function<T, Integer> f : functions) {
+                comparator = comparator.thenComparing(f);
+            }
+        }
+        return isSortedBy(comparator);
+    }
+
+    public S isUnsorted() {
+        List<T> list = Stream.of(value).sorted().collect(toList());
+        if (!Objects.deepEquals(Arrays.asList(value), list)) {
+            return instance;
+        }
+        throw error("Expected %s to be unsorted", Arrays.toString(value));
     }
 
     private boolean isArrayEmpty() {

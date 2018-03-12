@@ -3,6 +3,7 @@ package de.toberkoe.fluentassertions.api;
 import org.junit.jupiter.api.Test;
 
 import static de.toberkoe.fluentassertions.api.Assertions.assertThat;
+import static java.util.Comparator.comparingInt;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -105,6 +106,24 @@ class ObjectArrayAssertTest {
     void doesNotHaveDuplicates() {
         assertThat(new Object[] {1, 2, 3, 4, 5}).doesNotHaveDuplicates();
         assertThrows(AssertionError.class, () -> assertThat(new Object[] {1, 1, 1}).doesNotHaveDuplicates());
+    }
+
+    @Test
+    void isSorted() {
+        assertThat(new Object[]{1, 2, 3, 4, 5}).isSorted();
+        assertThrows(AssertionError.class, () -> assertThat(new Object[]{1, 2, 6, 5}).isSorted());
+    }
+
+    @Test
+    void isSortedBy() {
+        assertThat(new String[]{"a", "ab", "abc"}).isSortedBy((o1, o2) -> comparingInt(v -> v.toString().length()).compare(o1, o2));
+        assertThrows(AssertionError.class, () -> assertThat(new Object[]{"ab", "a", "abc"}).isSortedBy(o -> o.toString().length()));
+    }
+
+    @Test
+    void isUnsorted() {
+        assertThat(new Object[]{2, 5, 3}).isUnsorted();
+        assertThrows(AssertionError.class, () -> assertThat(new Object[]{1, 2, 3}).isUnsorted());
     }
 
 }

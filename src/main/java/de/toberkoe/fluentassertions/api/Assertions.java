@@ -179,4 +179,14 @@ public class Assertions {
         return new ObjectArrayAssert(array);
     }
 
+    /**
+     * Creates an instance of {@link BooleanArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static BooleanArrayAssert assertThat(boolean[] array) {
+        return new BooleanArrayAssert(array);
+    }
+
 }
