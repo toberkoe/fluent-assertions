@@ -14,4 +14,13 @@ public class BigDecimalAssert extends NumberAssert<BigDecimalAssert, BigDecimal>
         super(value);
     }
 
+    public BigDecimalAssert isEqualTo(String valueAsString) {
+        try {
+            BigDecimal expected = new BigDecimal(valueAsString);
+            return isEqualTo(expected);
+        } catch (NumberFormatException e) {
+            throw error("Given value '%s' cannot be pared as number", valueAsString);
+        }
+    }
+
 }

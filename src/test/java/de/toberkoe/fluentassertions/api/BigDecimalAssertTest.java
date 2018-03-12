@@ -73,6 +73,13 @@ class BigDecimalAssertTest {
         assertThrows(AssertionError.class, () -> Assertions.assertThat(negative).isGreaterThanOrEqualTo(positive));
     }
 
+    @Test
+    void testIsEqualToString() {
+        BigDecimal value = BigDecimal.valueOf(10.035);
+        Assertions.assertThat(value).isEqualTo("10.035");
+        assertThrows(AssertionError.class, () -> Assertions.assertThat(value).isEqualTo("Text"));
+    }
+
 
 
 }
