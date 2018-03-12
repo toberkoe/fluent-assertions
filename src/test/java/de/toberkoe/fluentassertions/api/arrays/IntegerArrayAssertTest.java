@@ -89,12 +89,14 @@ class IntegerArrayAssertTest {
     @Test
     void startsWith() {
         assertThat(new int[]{1, 2, 3, 4, 5}).startsWith(1, 2, 3);
+        assertThat(new int[]{1, 2, 3}).startsWith(1, 2, 3);
         assertThrows(AssertionError.class, () -> assertThat(new int[]{1, 2, 3}).startsWith(2, 3));
     }
 
     @Test
     void endsWith() {
         assertThat(new int[]{1, 2, 3, 4, 5}).endsWith(3, 4, 5);
+        assertThat(new int[]{3, 4, 5}).endsWith(3, 4, 5);
         assertThrows(AssertionError.class, () -> assertThat(new int[]{1, 2, 3}).endsWith(3, 1));
     }
 

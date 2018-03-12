@@ -7,7 +7,7 @@ public class IntegerArrayAssert extends AbstractArrayAssert<IntegerArrayAssert, 
     }
 
     public IntegerArrayAssert(int[] value) {
-        super(toObjectArray(value));
+        this(toObjectArray(value));
     }
 
     private static Integer[] toObjectArray(int[] array) {

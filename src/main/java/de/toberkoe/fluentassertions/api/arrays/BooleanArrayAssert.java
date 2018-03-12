@@ -7,7 +7,7 @@ public class BooleanArrayAssert extends AbstractArrayAssert<BooleanArrayAssert, 
     }
 
     public BooleanArrayAssert(boolean[] value) {
-        super(toObjectArray(value));
+        this(toObjectArray(value));
     }
 
     private static Boolean[] toObjectArray(boolean[] array) {

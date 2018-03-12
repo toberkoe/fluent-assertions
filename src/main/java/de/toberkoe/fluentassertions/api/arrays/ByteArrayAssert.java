@@ -7,7 +7,7 @@ public class ByteArrayAssert extends AbstractArrayAssert<ByteArrayAssert, Byte> 
     }
 
     public ByteArrayAssert(byte[] value) {
-        super(toObjectArray(value));
+        this(toObjectArray(value));
     }
 
     private static Byte[] toObjectArray(byte[] array) {

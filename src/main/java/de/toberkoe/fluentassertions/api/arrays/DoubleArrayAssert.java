@@ -7,7 +7,7 @@ public class DoubleArrayAssert extends AbstractArrayAssert<DoubleArrayAssert, Do
     }
 
     public DoubleArrayAssert(double[] value) {
-        super(toObjectArray(value));
+        this(toObjectArray(value));
     }
 
     private static Double[] toObjectArray(double[] array) {

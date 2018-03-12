@@ -7,7 +7,7 @@ public class LongArrayAssert extends AbstractArrayAssert<LongArrayAssert, Long> 
     }
 
     public LongArrayAssert(long[] value) {
-        super(toObjectArray(value));
+        this(toObjectArray(value));
     }
 
     private static Long[] toObjectArray(long[] array) {
