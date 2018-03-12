@@ -199,4 +199,14 @@ public class Assertions {
         return new IntegerArrayAssert(array);
     }
 
+    /**
+     * Creates an instance of {@link LongArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static LongArrayAssert assertThat(long[] array) {
+        return new LongArrayAssert(array);
+    }
+
 }

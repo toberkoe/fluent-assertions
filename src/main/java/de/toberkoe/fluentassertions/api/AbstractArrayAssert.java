@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 public abstract class AbstractArrayAssert<S extends AbstractArrayAssert<S, T>, T> extends AbstractObjectAssert<S, T[]> {
 
     //TODO tests for:
-    //assertion classes for primitives: int[], long[], double[], byte[]
+    //assertion classes for primitives: long[], double[], byte[]
     //isSortedBy extensions for String[], Boolean[], Integer[], Double[], Long[]
 
     protected AbstractArrayAssert(T[] value) {
