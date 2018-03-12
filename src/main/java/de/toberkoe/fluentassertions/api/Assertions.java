@@ -1,9 +1,6 @@
 package de.toberkoe.fluentassertions.api;
 
-import de.toberkoe.fluentassertions.api.arrays.BooleanArrayAssert;
-import de.toberkoe.fluentassertions.api.arrays.IntegerArrayAssert;
-import de.toberkoe.fluentassertions.api.arrays.LongArrayAssert;
-import de.toberkoe.fluentassertions.api.arrays.ObjectArrayAssert;
+import de.toberkoe.fluentassertions.api.arrays.*;
 import de.toberkoe.fluentassertions.api.collections.CollectionAssert;
 import de.toberkoe.fluentassertions.api.collections.ListAssert;
 import de.toberkoe.fluentassertions.api.collections.MapAssert;
@@ -218,6 +215,26 @@ public class Assertions {
      */
     public static LongArrayAssert assertThat(long[] array) {
         return new LongArrayAssert(array);
+    }
+
+    /**
+     * Creates an instance of {@link DoubleArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static DoubleArrayAssert assertThat(double[] array) {
+        return new DoubleArrayAssert(array);
+    }
+
+    /**
+     * Creates an instance of {@link ByteArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static ByteArrayAssert assertThat(byte[] array) {
+        return new ByteArrayAssert(array);
     }
 
 }
