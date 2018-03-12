@@ -2,7 +2,7 @@ package de.toberkoe.fluentassertions.api.arrays;
 
 public class BooleanArrayAssert extends AbstractArrayAssert<BooleanArrayAssert, Boolean> {
 
-    protected BooleanArrayAssert(Boolean[] value) {
+    public BooleanArrayAssert(Boolean[] value) {
         super(value);
     }
 

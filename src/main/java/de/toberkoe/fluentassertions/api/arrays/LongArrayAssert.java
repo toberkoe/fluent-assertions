@@ -2,7 +2,7 @@ package de.toberkoe.fluentassertions.api.arrays;
 
 public class LongArrayAssert extends AbstractArrayAssert<LongArrayAssert, Long> {
 
-    protected LongArrayAssert(Long[] value) {
+    public LongArrayAssert(Long[] value) {
         super(value);
     }
 

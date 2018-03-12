@@ -116,7 +116,8 @@ class ObjectArrayAssertTest {
 
     @Test
     void isSortedBy() {
-        assertThat(new String[]{"a", "ab", "abc"}).isSortedBy((o1, o2) -> comparingInt(v -> v.toString().length()).compare(o1, o2));
+        assertThat(new String[]{"a", "ab", "abc"}).isSortedBy(comparingInt(String::length));
+        assertThat(new String[]{"a", "ab", "abc"}).isSortedBy(String::length);
         assertThrows(AssertionError.class, () -> assertThat(new Object[]{"ab", "a", "abc"}).isSortedBy(o -> o.toString().length()));
     }
 

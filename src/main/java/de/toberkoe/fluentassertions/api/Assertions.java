@@ -198,12 +198,32 @@ public class Assertions {
     }
 
     /**
+     * Creates an instance of {@link BooleanArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static BooleanArrayAssert assertThat(Boolean[] array) {
+        return new BooleanArrayAssert(array);
+    }
+
+    /**
      * Creates an instance of {@link IntegerArrayAssert}.
      *
      * @param array the value to be asserted
      * @return instance of assertion object
      */
     public static IntegerArrayAssert assertThat(int[] array) {
+        return new IntegerArrayAssert(array);
+    }
+
+    /**
+     * Creates an instance of {@link IntegerArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static IntegerArrayAssert assertThat(Integer[] array) {
         return new IntegerArrayAssert(array);
     }
 
@@ -218,12 +238,32 @@ public class Assertions {
     }
 
     /**
+     * Creates an instance of {@link LongArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static LongArrayAssert assertThat(Long[] array) {
+        return new LongArrayAssert(array);
+    }
+
+    /**
      * Creates an instance of {@link DoubleArrayAssert}.
      *
      * @param array the value to be asserted
      * @return instance of assertion object
      */
     public static DoubleArrayAssert assertThat(double[] array) {
+        return new DoubleArrayAssert(array);
+    }
+
+    /**
+     * Creates an instance of {@link DoubleArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static DoubleArrayAssert assertThat(Double[] array) {
         return new DoubleArrayAssert(array);
     }
 
@@ -235,6 +275,16 @@ public class Assertions {
      */
     public static ByteArrayAssert assertThat(byte[] array) {
         return new ByteArrayAssert(array);
+    }
+
+    /**
+     * Creates an instance of {@link StringArrayAssert}.
+     *
+     * @param array the value to be asserted
+     * @return instance of assertion object
+     */
+    public static StringArrayAssert assertThat(String[] array) {
+        return new StringArrayAssert(array);
     }
 
 }

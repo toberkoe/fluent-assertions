@@ -2,7 +2,7 @@ package de.toberkoe.fluentassertions.api.arrays;
 
 public class IntegerArrayAssert extends AbstractArrayAssert<IntegerArrayAssert, Integer> {
 
-    protected IntegerArrayAssert(Integer[] value) {
+    public IntegerArrayAssert(Integer[] value) {
         super(value);
     }
 

@@ -2,7 +2,7 @@ package de.toberkoe.fluentassertions.api.arrays;
 
 public class DoubleArrayAssert extends AbstractArrayAssert<DoubleArrayAssert, Double> {
 
-    protected DoubleArrayAssert(Double[] value) {
+    public DoubleArrayAssert(Double[] value) {
         super(value);
     }
 
