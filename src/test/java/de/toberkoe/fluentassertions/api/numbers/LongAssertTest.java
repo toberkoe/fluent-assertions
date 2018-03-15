@@ -1,8 +1,8 @@
 package de.toberkoe.fluentassertions.api.numbers;
 
-import de.toberkoe.fluentassertions.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static de.toberkoe.fluentassertions.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LongAssertTest {
@@ -13,63 +13,69 @@ class LongAssertTest {
 
     @Test
     void testIsZero() {
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(negative).isZero());
-        Assertions.assertThat(zero).isZero();
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(positive).isZero());
+        assertThrows(AssertionError.class, () -> assertThat(negative).isZero());
+        assertThat(zero).isZero();
+        assertThrows(AssertionError.class, () -> assertThat(positive).isZero());
+    }
+
+    @Test
+    void testIsNotZero() {
+        assertThat(positive).isNotZero();
+        assertThrows(AssertionError.class, () -> assertThat(zero).isNotZero());
     }
 
     @Test
     void testIsNegative() {
-        Assertions.assertThat(negative).isNegative();
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(zero).isNegative());
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(positive).isNegative());
+        assertThat(negative).isNegative();
+        assertThrows(AssertionError.class, () -> assertThat(zero).isNegative());
+        assertThrows(AssertionError.class, () -> assertThat(positive).isNegative());
     }
 
     @Test
     void testIsPositive() {
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(negative).isPositive());
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(zero).isPositive());
-        Assertions.assertThat(positive).isPositive();
+        assertThrows(AssertionError.class, () -> assertThat(negative).isPositive());
+        assertThrows(AssertionError.class, () -> assertThat(zero).isPositive());
+        assertThat(positive).isPositive();
     }
 
     @Test
     void testIsLessThan() {
-        Assertions.assertThat(negative).isLessThan(positive);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(positive).isLessThan(positive));
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(positive).isLessThan(zero));
+        assertThat(negative).isLessThan(positive);
+        assertThrows(AssertionError.class, () -> assertThat(positive).isLessThan(positive));
+        assertThrows(AssertionError.class, () -> assertThat(positive).isLessThan(zero));
     }
 
     @Test
     void testIsGreaterThan() {
-        Assertions.assertThat(positive).isGreaterThan(negative);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(zero).isGreaterThan(zero));
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(zero).isGreaterThan(positive));
+        assertThat(positive).isGreaterThan(negative);
+        assertThrows(AssertionError.class, () -> assertThat(zero).isGreaterThan(zero));
+        assertThrows(AssertionError.class, () -> assertThat(zero).isGreaterThan(positive));
     }
 
     @Test
     void testIsEqualTo() {
-        Assertions.assertThat(positive).isEqualTo(positive);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(negative).isEqualTo(positive));
+        assertThat(positive).isEqualTo(positive);
+        assertThrows(AssertionError.class, () -> assertThat(negative).isEqualTo(positive));
     }
 
     @Test
     void testIsNotEqualTo() {
-        Assertions.assertThat(positive).isNotEqualTo(negative);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(zero).isNotEqualTo(zero));
+        assertThat(positive).isNotEqualTo(negative);
+        assertThrows(AssertionError.class, () -> assertThat(zero).isNotEqualTo(zero));
     }
 
     @Test
     void testIsLessThanOrEqualTo() {
-        Assertions.assertThat(zero).isLessThanOrEqualTo(zero);
-        Assertions.assertThat(zero).isLessThanOrEqualTo(positive);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(positive).isLessThanOrEqualTo(zero));
+        assertThat(zero).isLessThanOrEqualTo(zero);
+        assertThat(zero).isLessThanOrEqualTo(positive);
+        assertThrows(AssertionError.class, () -> assertThat(positive).isLessThanOrEqualTo(zero));
     }
 
     @Test
     void testIsGreaterThanOrEqualTo() {
-        Assertions.assertThat(positive).isGreaterThanOrEqualTo(positive);
-        Assertions.assertThat(positive).isGreaterThanOrEqualTo(zero);
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(negative).isGreaterThanOrEqualTo(positive));
+        assertThat(positive).isGreaterThanOrEqualTo(positive);
+        assertThat(positive).isGreaterThanOrEqualTo(zero);
+        assertThrows(AssertionError.class, () -> assertThat(negative).isGreaterThanOrEqualTo(positive));
     }
 
 

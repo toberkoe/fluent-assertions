@@ -29,6 +29,13 @@ public class NumberAssert<S extends NumberAssert<S, T>, T extends Number> extend
         throw error("Expected to be zero but was %s", value);
     }
 
+    public S isNotZero() {
+        if (test(v -> v.doubleValue() != 0)) {
+            return instance;
+        }
+        throw error("Expected to be not zero");
+    }
+
     public S isPositive() {
         if (test(v -> v.doubleValue() > 0)) {
             return instance;
