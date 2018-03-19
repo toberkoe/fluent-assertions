@@ -76,9 +76,9 @@ class BigDecimalAssertTest {
 
     @Test
     void testIsEqualToString() {
-        BigDecimal value = BigDecimal.valueOf(10.035);
-        Assertions.assertThat(value).isEqualTo("10.035");
-        assertThrows(AssertionError.class, () -> Assertions.assertThat(value).isEqualTo("Text"));
+        BigDecimal meaningOfLife = BigDecimal.ONE.add(BigDecimal.valueOf(20)).add(BigDecimal.valueOf(21.0)).add(BigDecimal.valueOf(0.10));
+        Assertions.assertThat(meaningOfLife).isEqualTo("42.1");
+        assertThrows(AssertionError.class, () -> Assertions.assertThat(meaningOfLife).isEqualTo("Text"));
     }
 
 
