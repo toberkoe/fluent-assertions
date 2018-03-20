@@ -13,7 +13,7 @@ plugins {
 }
 
 group 'de.toberkoe'
-version '0.3'
+version '0.4'
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
