@@ -5,10 +5,12 @@ import de.toberkoe.fluentassertions.api.collections.CollectionAssert;
 import de.toberkoe.fluentassertions.api.collections.ListAssert;
 import de.toberkoe.fluentassertions.api.collections.MapAssert;
 import de.toberkoe.fluentassertions.api.collections.SetAssert;
+import de.toberkoe.fluentassertions.api.date.*;
 import de.toberkoe.fluentassertions.api.numbers.*;
 import de.toberkoe.fluentassertions.api.objects.*;
 
 import java.math.BigDecimal;
+import java.time.*;
 import java.util.*;
 
 /**
@@ -285,6 +287,76 @@ public class Assertions {
      */
     public static StringArrayAssert assertThat(String[] array) {
         return new StringArrayAssert(array);
+    }
+
+    /**
+     * Creates an instance of {@link DateAssert}.
+     *
+     * @param date the value to be asserted
+     * @return instance of assertion object
+     */
+    public static DateAssert assertThat(Date date) {
+        return new DateAssert(date);
+    }
+
+    /**
+     * Creates an instance of {@link DurationAssert}.
+     *
+     * @param value the value to be asserted
+     * @return instance of assertion object
+     */
+    public static DurationAssert assertThat(Duration value) {
+        return new DurationAssert(value);
+    }
+
+    /**
+     * Creates an instance of {@link InstantAssert}.
+     *
+     * @param value the value to be asserted
+     * @return instance of assertion object
+     */
+    public static InstantAssert assertThat(Instant value) {
+        return new InstantAssert(value);
+    }
+
+    /**
+     * Creates an instance of {@link LocalDateAssert}.
+     *
+     * @param value the value to be asserted
+     * @return instance of assertion object
+     */
+    public static LocalDateAssert assertThat(LocalDate value) {
+        return new LocalDateAssert(value);
+    }
+
+    /**
+     * Creates an instance of {@link LocalDateTimeAssert}.
+     *
+     * @param value the value to be asserted
+     * @return instance of assertion object
+     */
+    public static LocalDateTimeAssert assertThat(LocalDateTime value) {
+        return new LocalDateTimeAssert(value);
+    }
+
+    /**
+     * Creates an instance of {@link LocalTimeAssert}.
+     *
+     * @param value the value to be asserted
+     * @return instance of assertion object
+     */
+    public static LocalTimeAssert assertThat(LocalTime value) {
+        return new LocalTimeAssert(value);
+    }
+
+    /**
+     * Creates an instance of {@link PeriodAssert}.
+     *
+     * @param value the value to be asserted
+     * @return instance of assertion object
+     */
+    public static PeriodAssert assertThat(Period value) {
+        return new PeriodAssert(value);
     }
 
 }
