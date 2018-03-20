@@ -36,7 +36,6 @@ class InstantAssertTest {
     void isInPast() {
         assertThat(yesterday).isInPast();
         assertThrows(AssertionError.class, () -> assertThat(tomorrow).isInPast());
-        assertThrows(AssertionError.class, () -> assertThat(Instant.now()).isInPast());
     }
 
     @Test
