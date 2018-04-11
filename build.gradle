@@ -22,8 +22,8 @@ apply plugin: 'maven'
 apply plugin: 'io.codearte.nexus-staging'
 apply plugin: 'signing'
 
-sourceCompatibility = 9.0
-targetCompatibility = 9.0
+sourceCompatibility = 10.0
+targetCompatibility = 10.0
 
 repositories {
     mavenCentral()
@@ -89,8 +89,6 @@ signing {
 }
 
 allprojects {
-
-
     uploadArchives {
         repositories {
             mavenDeployer {
