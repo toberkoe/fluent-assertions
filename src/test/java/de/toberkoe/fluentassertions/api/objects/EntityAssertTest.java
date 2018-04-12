@@ -127,50 +127,94 @@ class EntityAssertTest {
         assertThrows(AssertionError.class, () -> assertThatEntity(validEntity).hasInvalidAttribute("name"));
     }
 
-//    hasNullableFields()
-//    hasTransientFields()
-//    isComparable()
-    //isToStringImplemented()
-    //isHashCodeImplemented()
-    //isEqualsImplemented()
+    @Test
+    void hasTransientFields() {
+        DummyEntity validEntity = new DummyEntity(1L, "Duke");
+        assertThatEntity(validEntity).hasTransientFields();
+        assertThrows(AssertionError.class, () -> assertThatEntity("").hasTransientFields());
+    }
+
+    @Test
+    void isComparable() {
+        assertThatEntity("").isComparable();
+        assertThrows(AssertionError.class, () -> assertThatEntity(DummyEntity.ZERO).isComparable());
+    }
+
+    @Test
+    void isToStringImplemented() {
+        assertThatEntity("").isToStringImplemented();
+        assertThrows(AssertionError.class, () -> assertThatEntity(DummyEntity.ZERO).isToStringImplemented());
+    }
+
+    @Test
+    void isHashCodeImplemented() {
+        assertThatEntity("").isHashCodeImplemented();
+        assertThrows(AssertionError.class, () -> assertThatEntity(DummyEntity.ZERO).isHashCodeImplemented());
+    }
+
+    @Test
+    void isEqualsImplemented() {
+        assertThatEntity("").isEqualsImplemented();
+        assertThrows(AssertionError.class, () -> assertThatEntity(DummyEntity.ZERO).isEqualsImplemented());
+    }
 
     @Test
     void isNull() {
+        assertThatEntity(null).isNull();
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isNull());
     }
 
     @Test
     void isNotNull() {
+        assertThatEntity("").isNotNull();
+        assertThrows(AssertionError.class, () -> assertThatEntity(null).isNotNull());
     }
 
     @Test
     void isEqualTo() {
+        assertThatEntity("").isEqualTo("");
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isEqualTo(" "));
     }
 
     @Test
     void isNotEqualTo() {
+        assertThatEntity("").isNotEqualTo(" ");
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isNotEqualTo(""));
     }
 
     @Test
     void isSameAs() {
+        assertThatEntity("").isSameAs("");
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isSameAs(" "));
     }
 
     @Test
     void isNotSameAs() {
+        assertThatEntity("").isNotSameAs(" ");
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isNotSameAs(""));
     }
 
     @Test
     void isInstanceOf() {
+        assertThatEntity("").isInstanceOf(String.class);
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isInstanceOf(Integer.class));
     }
 
     @Test
     void isNotInstanceOf() {
+        assertThatEntity("").isNotInstanceOf(Integer.class);
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isNotInstanceOf(String.class));
     }
 
     @Test
     void isInstanceOfAny() {
+        assertThatEntity("").isInstanceOfAny(String.class);
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isInstanceOfAny(Integer.class));
     }
 
     @Test
     void isNotInstanceOfAny() {
+        assertThatEntity("").isNotInstanceOfAny(Integer.class);
+        assertThrows(AssertionError.class, () -> assertThatEntity("").isNotInstanceOfAny(String.class));
     }
 }

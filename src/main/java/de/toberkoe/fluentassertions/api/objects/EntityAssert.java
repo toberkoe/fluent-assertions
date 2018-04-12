@@ -100,14 +100,20 @@ public class EntityAssert<E> extends AbstractObjectAssert<EntityAssert<E>, E> {
     }
 
     private Stream<AccessibleObject> getAccessorsAnnotatedWith(Class<? extends Annotation> annotation) {
-        Stream<AccessibleObject> fields = Stream.of(value.getClass().getDeclaredFields());
+        Stream<AccessibleObject> fields = getFields(value.getClass());
         Stream<AccessibleObject> methods = getMethods(value.getClass());
 
         return Stream.concat(fields, methods).filter(o -> o.isAnnotationPresent(annotation));
     }
 
+    private Stream<AccessibleObject> getFields(Class<?> targetClass) {
+        return Stream.of(targetClass.getDeclaredFields());
+    }
+
     private Stream<AccessibleObject> getMethods(Class<?> targetClass) {
-        Stream<AccessibleObject> stream = Stream.of(targetClass.getMethods());
+        Stream<AccessibleObject> stream = Stream.of(targetClass.getMethods())
+                .filter(m -> m.getDeclaringClass() != Object.class)
+                .map(m -> (AccessibleObject) m);
         if (targetClass.getSuperclass() != null) {
             Stream<AccessibleObject> parentMethods = getMethods(targetClass.getSuperclass());
             return Stream.concat(stream, parentMethods);
@@ -167,16 +173,6 @@ public class EntityAssert<E> extends AbstractObjectAssert<EntityAssert<E>, E> {
                 .collect(toList());
     }
 
-    public EntityAssert<E> hasNullableFields() {
-        //FIXME create new instance
-        //FIXME validate
-        //FIXME get distinct list of invalid attributes
-        //FIXME subtract primitives
-        //FIXME compare size of invalid attributes to total count of fields
-        return instance;
-    }
-
-
     public EntityAssert<E> hasTransientFields() {
         if (getAccessorsAnnotatedWith(Transient.class).count() > 0) {
             return instance;
@@ -184,10 +180,33 @@ public class EntityAssert<E> extends AbstractObjectAssert<EntityAssert<E>, E> {
         throw error("Expected entity to have at least one transient field");
     }
 
-//    isComparable()
-    //isToStringImplemented()
-    //isHashCodeImplemented()
-    //isEqualsImplemented()
+    public EntityAssert<E> isComparable() {
+        if (value instanceof Comparable) {
+            return instance;
+        }
+        throw error("Expected entity to be comparable");
+    }
+
+    public EntityAssert<E> isToStringImplemented() {
+        return isMethodImplemented("toString");
+    }
+
+    public EntityAssert<E> isHashCodeImplemented() {
+        return isMethodImplemented("hashCode");
+    }
+
+    public EntityAssert<E> isEqualsImplemented() {
+        return isMethodImplemented("equals");
+    }
+
+    private EntityAssert<E> isMethodImplemented(String methodName) {
+        getMethods(value.getClass())
+                .map(m -> (Method) m)
+                .filter(m -> m.getName().equals(methodName))
+                .findAny()
+                .orElseThrow(() -> error("Expected entity to implement " + methodName));
+        return instance;
+    }
 
     public <V> EntityAssert<E> isFieldAccessUnmodified(V attributeValue, BiConsumer<E, V> setter, Function<E, V> getter) {
         setter.accept(value, attributeValue);
