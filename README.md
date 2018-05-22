@@ -36,7 +36,7 @@ dependencies {
 
 ## Examples
 Use ```de.toberkoe.fluentassertions.api.Assertions#assertThat``` as entry point for type-specific fluent assertions.
-To make tests more readable, it is recommendend to access this class as a static import.
+To make tests more readable, it is recommended to access this class as a static import.
 
 ```java
 import static de.toberkoe.fluentassertions.api.Assertions.assertThat;
