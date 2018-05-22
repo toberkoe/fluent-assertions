@@ -12,8 +12,9 @@ plugins {
     id 'org.sonarqube' version '2.6.1'
 }
 
+ext.moduleName = 'de.toberkoe.fluentassertions'
 group 'de.toberkoe'
-version '0.4'
+version '0.5'
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
@@ -30,6 +31,12 @@ repositories {
 }
 
 dependencies {
+    compile 'javax.persistence:javax.persistence-api:2.2'
+    compile 'javax.validation:validation-api:2.0.0.Final'
+    compile 'org.hibernate.validator:hibernate-validator:6.0.2.Final'
+    compile 'javax.el:javax.el-api:3.0.0'
+    compile 'org.glassfish.web:javax.el:2.2.6'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
 
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
@@ -49,7 +56,7 @@ afterEvaluate {
     def junitPlatformTestTask = (JavaExec) project.tasks.getByName('junitPlatformTest')
 
     jacoco {
-        toolVersion '0.7.9'
+        toolVersion '0.8.1'
         applyTo(junitPlatformTestTask)
     }
 
@@ -89,8 +96,6 @@ signing {
 }
 
 allprojects {
-
-
     uploadArchives {
         repositories {
             mavenDeployer {
@@ -122,7 +127,7 @@ allprojects {
                         developer {
                             id = 'tbk'
                             name = 'Tobias Bertram-Köhler'
-                            email = 't.bertramkoehler@mail.com'
+                            email = 't.bertramkoehler@gmail.com'
                         }
                     }
                 }

@@ -359,4 +359,17 @@ public class Assertions {
         return new PeriodAssert(value);
     }
 
+
+    /**
+     * Creates an instance of {@link EntityAssert}.
+     *
+     * @param entity the value to be asserted
+     * @param <E>    type of value
+     * @return instance of assertion object
+     */
+    public static <E> EntityAssert<E> assertThatEntity(E entity) {
+        return new EntityAssert<>(entity);
+    }
+
+
 }

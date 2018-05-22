@@ -137,6 +137,6 @@ public abstract class AbstractObjectAssert<S extends AbstractObjectAssert<S, T>,
     }
 
     protected String formatObject(Object object) {
-        return object.toString();
+        return object == null ? "null" : object.toString();
     }
 }

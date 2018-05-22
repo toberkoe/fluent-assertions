@@ -1,2 +1,0 @@
-module fluent.assertions.main {
-}
